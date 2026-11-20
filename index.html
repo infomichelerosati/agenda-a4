@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agenda A4 Stampabile · Appuntamenti Lun–Sab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Configurazione agenda">
+      <div class="sidebar-header">
+        <div class="brand-row">
+          <div class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+              <line x1="8" y1="14" x2="16" y2="14"></line>
+              <line x1="8" y1="18" x2="13" y2="18"></line>
+            </svg>
+          </div>
+          <div>
+            <h1 class="brand-title">Agenda A4 Appuntamenti</h1>
+            <p class="brand-subtitle">Lun–Sab · 07:30–20:00 · Fronte/Retro</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-scroll">
+        <!-- 1. Periodo di stampa -->
+        <section class="control-section">
+          <h2 class="section-title">1. Periodo di stampa</h2>
+          <div class="preset-grid" id="preset-buttons">
+            <button type="button" class="preset-btn" data-preset="this-week">Questa sett.</button>
+            <button type="button" class="preset-btn active" data-preset="next-4-weeks">4 settimane</button>
+            <button type="button" class="preset-btn" data-preset="this-month">Questo mese</button>
+            <button type="button" class="preset-btn" data-preset="next-month">Mese prossimo</button>
+            <button type="button" class="preset-btn" data-preset="quarter">Trimestre</button>
+            <button type="button" class="preset-btn" data-preset="semester">Semestre</button>
+            <button type="button" class="preset-btn" data-preset="current-year" id="btn-preset-year-curr">Anno 2026</button>
+            <button type="button" class="preset-btn" data-preset="next-year" id="btn-preset-year-next">Anno 2027</button>
+          </div>
+
+          <div class="date-row">
+            <label class="field">
+              <span class="field-label">Dal</span>
+              <input type="date" id="input-start-date">
+            </label>
+            <label class="field">
+              <span class="field-label">Al</span>
+              <input type="date" id="input-end-date">
+            </label>
+          </div>
+
+          <div class="summary-card" id="period-summary">
+            <!-- Populated by app.js -->
+          </div>
+        </section>
+
+        <!-- 2. Fronte/Retro e Rilegatura -->
+        <section class="control-section">
+          <h2 class="section-title">2. Fronte/Retro e Rilegatura</h2>
+          <div class="duplex-grid" role="radiogroup" aria-label="Modalità fronte-retro">
+            <button type="button" class="duplex-card active" data-duplex="fronte-retro" aria-pressed="true">
+              <svg class="duplex-svg" viewBox="0 0 64 42" aria-hidden="true">
+                <rect x="4" y="4" width="24" height="34" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6"></rect>
+                <line x1="9" y1="11" x2="23" y2="11" stroke="currentColor" stroke-width="1.5"></line>
+                <line x1="9" y1="16" x2="23" y2="16" stroke="currentColor" stroke-width="1" opacity="0.5"></line>
+                <line x1="9" y1="21" x2="23" y2="21" stroke="currentColor" stroke-width="1" opacity="0.5"></line>
+                <text x="16" y="32" font-size="6" text-anchor="middle" fill="currentColor" font-weight="bold">L M M</text>
+                <rect x="36" y="4" width="24" height="34" rx="2" fill="#fff" stroke="currentColor" stroke-width="1.6" stroke-dasharray="2.5 1.5"></rect>
+                <line x1="41" y1="11" x2="55" y2="11" stroke="currentColor" stroke-width="1.5"></line>
+                <line x1="41" y1="16" x2="55" y2="16" stroke="currentColor" stroke-width="1" opacity="0.5"></line>
+                <line x1="41" y1="21" x2="55" y2="21" stroke="currentColor" stroke-width="1" opacity="0.5"></line>
+                <text x="48" y="32" font-size="6" text-anchor="middle" fill="currentColor" font-weight="bold">G V S</text>
+              </svg>
+              <span class="duplex-card-title">Fronte/Retro diretto</span>
+              <span class="duplex-card-desc">1 foglio = 1 sett. (Lun–Mer / Gio–Sab)</span>
+            </button>
+
+            <button type="button" class="duplex-card" data-duplex="libro" aria-pressed="false">
+              <svg class="duplex-svg" viewBox="0 0 64 42" aria-hidden="true">
+                <rect x="4" y="4" width="27" height="34" rx="1.5" fill="#fff" stroke="currentColor" stroke-width="1.6"></rect>
+                <rect x="33" y="4" width="27" height="34" rx="1.5" fill="#fff" stroke="currentColor" stroke-width="1.6"></rect>
+                <line x1="32" y1="3" x2="32" y2="39" stroke="currentColor" stroke-width="2"></line>
+                <circle cx="32" cy="11" r="1.4" fill="currentColor"></circle>
+                <circle cx="32" cy="21" r="1.4" fill="currentColor"></circle>
+                <circle cx="32" cy="31" r="1.4" fill="currentColor"></circle>
+                <text x="17" y="24" font-size="6" text-anchor="middle" fill="currentColor" font-weight="bold">L M M</text>
+                <text x="47" y="24" font-size="6" text-anchor="middle" fill="currentColor" font-weight="bold">G V S</text>
+              </svg>
+              <span class="duplex-card-title">Apertura a Libro</span>
+              <span class="duplex-card-desc">Copertina + 6 giorni affiancati</span>
+            </button>
+          </div>
+
+          <label class="field field-full">
+            <span class="field-label">Margine rilegatura (specchiato fronte/retro)</span>
+            <select id="select-binding">
+              <option value="15" selected>Spirale / Anelli (15 mm)</option>
+              <option value="20">Raccoglitore ad anelli (20 mm)</option>
+              <option value="9">Simmetrico / Fogli sciolti (9 mm)</option>
+            </select>
+          </label>
+        </section>
+
+        <!-- 3. Orari e Intervalli -->
+        <section class="control-section">
+          <h2 class="section-title">3. Orari e Intervalli</h2>
+          <div class="time-grid">
+            <label class="field">
+              <span class="field-label">Inizio</span>
+              <select id="select-start-time"></select>
+            </label>
+            <label class="field">
+              <span class="field-label">Fine</span>
+              <select id="select-end-time"></select>
+            </label>
+            <label class="field">
+              <span class="field-label">Intervallo</span>
+              <select id="select-step">
+                <option value="15" selected>15 min</option>
+                <option value="30">30 min</option>
+                <option value="60">60 min</option>
+              </select>
+            </label>
+          </div>
+          <div class="slot-metrics" id="slot-metrics">51 riquadri · 4,9 mm ciascuno</div>
+        </section>
+
+        <!-- 4. Stile e Opzioni -->
+        <section class="control-section">
+          <h2 class="section-title">4. Stile e Opzioni</h2>
+          <label class="field field-full">
+            <span class="field-label">Titolo intestazione</span>
+            <input type="text" id="input-title" value="Agenda Appuntamenti" maxlength="60" placeholder="Es. Studio Rossi · Appuntamenti">
+          </label>
+
+          <div class="field field-full">
+            <span class="field-label">Tema colore stampa</span>
+            <div class="theme-row" id="theme-swatches">
+              <button type="button" class="theme-chip active" data-theme="blu">
+                <span class="swatch-dot" style="background:#1e3a5f"></span>
+                <span>Blu Notte</span>
+              </button>
+              <button type="button" class="theme-chip" data-theme="grafite">
+                <span class="swatch-dot" style="background:#1f2937"></span>
+                <span>Grafite B/N</span>
+              </button>
+              <button type="button" class="theme-chip" data-theme="salvia">
+                <span class="swatch-dot" style="background:#264d43"></span>
+                <span>Salvia</span>
+              </button>
+              <button type="button" class="theme-chip" data-theme="bordeaux">
+                <span class="swatch-dot" style="background:#6b2138"></span>
+                <span>Bordeaux</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="checkbox-list">
+            <label class="checkbox-item">
+              <input type="checkbox" id="chk-holidays" checked>
+              <span>Festività italiane</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="chk-week-num" checked>
+              <span>Numero settimana (Sett.)</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="chk-alt-hours" checked>
+              <span>Sfondo ore alternate</span>
+            </label>
+            <label class="checkbox-item">
+              <input type="checkbox" id="chk-notes">
+              <span>Fascia Note in fondo</span>
+            </label>
+          </div>
+        </section>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="cta-row">
+          <button type="button" id="btn-download-pdf" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            <span>Scarica PDF (A4)</span>
+          </button>
+          <button type="button" id="btn-print-direct" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 6 2 18 2 18 9"></polyline>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <rect x="6" y="14" width="12" height="8"></rect>
+            </svg>
+            <span>Stampa diretta</span>
+          </button>
+        </div>
+        <p class="print-tip">Stampa al 100% (dimensioni reali) · Fronte/Retro: Capovolgi sul lato lungo</p>
+      </div>
+    </aside>
+
+    <main class="workspace" aria-label="Anteprima fogli A4">
+      <div class="toolbar">
+        <div class="toolbar-group">
+          <div class="segmented" role="group" aria-label="Modalità vista">
+            <button type="button" id="btn-view-spread" class="seg-btn active">Vista Doppia</button>
+            <button type="button" id="btn-view-single" class="seg-btn">Pagina Singola</button>
+          </div>
+          <button type="button" id="btn-binding-guide" class="tool-toggle active" aria-pressed="true" title="Mostra/nascondi guida margine rilegatura">
+            Guida rilegatura
+          </button>
+        </div>
+
+        <div class="toolbar-group nav-group">
+          <button type="button" id="btn-prev" class="icon-btn" aria-label="Pagina precedente" title="Precedente (Freccia sinistra)">◀</button>
+          <select id="select-nav" class="nav-select" aria-label="Seleziona pagina o foglio"></select>
+          <button type="button" id="btn-next" class="icon-btn" aria-label="Pagina successiva" title="Successiva (Freccia destra)">▶</button>
+        </div>
+
+        <div class="toolbar-group zoom-group">
+          <button type="button" id="btn-zoom-out" class="icon-btn" aria-label="Riduci zoom">−</button>
+          <span id="zoom-label" class="zoom-label">65%</span>
+          <button type="button" id="btn-zoom-in" class="icon-btn" aria-label="Aumenta zoom">+</button>
+          <button type="button" id="btn-zoom-fit" class="tool-btn">Adatta</button>
+        </div>
+      </div>
+
+      <div class="preview-viewport" id="preview-viewport">
+        <div class="preview-stage" id="preview-stage"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="print-container" aria-hidden="true"></div>
+
+  <script src="js/holidays.js" defer></script>
+  <script src="js/themes.js" defer></script>
+  <script src="js/calendar.js" defer></script>
+  <script src="js/pdf-engine.js" defer></script>
+  <script src="js/preview.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
